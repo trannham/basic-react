@@ -3,31 +3,56 @@ import React from "react";
 class MyComponent extends React.Component {
   //key: value
   state = {
-    name: "Tran",
-    status: "unemployment",
+    firstName: "",
+    lastName: "",
   };
 
   // JSX -> return only 1 block
   // <React.Fragment> or <>
-  handleOnChangeName = (event) => {
+  handleChangeFirstname = (event) => {
     this.setState({
-      name: event.target.value,
+      firstName: event.target.value,
     });
   };
 
+  handleChangeLastname = (event) => {
+    this.setState({
+      lastName: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(">>> data input: ", this.state);
+  };
   render() {
+    console.log(">>>Render", this.state);
     return (
       <>
-        <div className="first">
+        <form>
+          <label htmlFor="fname">First name:</label>
+          <br />
           <input
-            value={this.state.name}
             type="text"
-            onChange={(event) => this.handleOnChangeName(event)}
+            value={this.state.firstName}
+            onChange={(event) => this.handleChangeFirstname(event)}
           />
-          Hello from my component, my name is {this.state.name} or{" "}
-          {this.state["name"]}.
-        </div>
-        <div className="second">My status is {this.state.status}.</div>
+          <br />
+          <label htmlFor="lname">Last name:</label>
+          <br />
+          <input
+            type="text"
+            value={this.state.lastName}
+            onChange={(event) => this.handleChangeLastname(event)}
+          />
+          <br />
+          <br />
+          <input
+            type="submit"
+            value="Submit"
+            onClick={(event) => this.handleSubmit(event)}
+          />
+        </form>
       </>
     );
   }
